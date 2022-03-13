@@ -1,0 +1,12 @@
+version: '3'
+services:
+  project_db:
+    image: shilajitgr/csv_db:latest
+  assignment:
+    image: shilajitgr/csv_manager:ext_db
+    restart: always
+    depends_on:
+      - project_db
+    command: python setup.py
+    ports:
+      - '7010:8000'
