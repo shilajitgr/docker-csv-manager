@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "37f62810-ac4d-4e10-bbab-24acdbca6f45",
+		"name": "assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "upload csv",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ3ODE1NTk2LCJpYXQiOjE2NDcyMTA3OTYsImp0aSI6ImUxNjRiZGEwYjFmMzQ1ZjI4ZjM0YzhjOTllODg0M2FiIiwidXNlcl9pZCI6MX0.qOHAVqItDl0mrlzfwTksxixjHYLloshu0VhO85vpFOA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/D:/csv_manager/Book1.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.52.164:7010/csv_revise/upload_csv/",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"52",
+						"164"
+					],
+					"port": "7010",
+					"path": [
+						"csv_revise",
+						"upload_csv",
+						""
+					],
+					"query": [
+						{
+							"key": "file",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ3ODE1NTk2LCJpYXQiOjE2NDcyMTA3OTYsImp0aSI6ImUxNjRiZGEwYjFmMzQ1ZjI4ZjM0YzhjOTllODg0M2FiIiwidXNlcl9pZCI6MX0.qOHAVqItDl0mrlzfwTksxixjHYLloshu0VhO85vpFOA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.52.164:7010/csv_watch/list_data/1/10",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"52",
+						"164"
+					],
+					"port": "7010",
+					"path": [
+						"csv_watch",
+						"list_data",
+						"1",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filter orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"date_range\": [\"2022-01-01\", \"2022-02-28\"],\r\n    \"total_price_range\": [6000.2, 30000.22],\r\n    \"quantity_range\": [200, 500],\r\n    \"city_name\": \"Guwahati\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.52.164:7010/csv_watch/filter_data/",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"52",
+						"164"
+					],
+					"port": "7010",
+					"path": [
+						"csv_watch",
+						"filter_data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "download data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"date_range\": [\"2020-01-01\", \"2022-02-28\"],\r\n    \"total_price_range\": [3000.2, 30000.22],\r\n    \"quantity_range\": [200, 500],\r\n    \"city_name\": \"Guwahati\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.52.164:7010/csv_watch/export_data/",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"52",
+						"164"
+					],
+					"port": "7010",
+					"path": [
+						"csv_watch",
+						"export_data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete entry",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ3ODM1ODczLCJpYXQiOjE2NDcyMzEwNzMsImp0aSI6IjcxMjIxMjU4Mjk1ODQzZTc4YzQwMzY0Mzc3ZGEyMTk1IiwidXNlcl9pZCI6MX0.KWcAbUQAgT-ah_2aRCkCxT4R-3s9oMcx-zYUxew307M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/csv_revise/remove/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"csv_revise",
+						"remove",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update entry",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ3NzkwMDMxLCJpYXQiOjE2NDcxODUyMzEsImp0aSI6IjNkNjMwMWQyMDhkOTRmNWZhZTc5ZjFlYThmNGFjNWVhIiwidXNlcl9pZCI6MX0.H_o7yxsizmcaPmkppRM_Oz3-LWp2kcgKD6__PgT1kvA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"transaction_id\": 5,\r\n    \"transaction_time\": \"20220212 070506\",\r\n    \"product_name\": \"detergent\",\r\n    \"quantity\": 230,\r\n    \"unit_price\": 120.0,\r\n    \"total_price\": 27600.0,\r\n    \"delivered_to_city\": \"Shillong\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/csv_revise/update/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"csv_revise",
+						"update",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.52.164:7010/api/token/",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"52",
+						"164"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
