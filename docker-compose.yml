@@ -9,4 +9,4 @@ services:
       - project_db
     command: python setup.py
     ports:
-      - '7010:8000'
+      - '80:8000'

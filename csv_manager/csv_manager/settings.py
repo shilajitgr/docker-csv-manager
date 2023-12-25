@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from pathlib import Path
+import json
+import dj_database_url
+from os import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from datetime import timedelta
@@ -67,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'csv_manager.urls'
@@ -89,21 +94,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'csv_manager.wsgi.application'
 
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'CSV_DB',
-        'USER': 'db_user',
-        'PASSWORD': 'db_pass',
-        'HOST': 'project_db',
-        'PORT': 5432,
-    }
-}
-
+if "DATABASE_SECRET" in environ:
+    database_secret = environ.get("DATABASE_SECRET")
+    db_url = json.loads(database_secret)["DATABASE_URL"]
+    DATABASES = {"default": dj_database_url.parse(db_url)}
+else:
+    DATABASES = {"default": dj_database_url.parse("sqlite:///db.sqlite3")}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -142,3 +150,4 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
