@@ -1,2 +1,2 @@
 #!/bin/bash
-python manage.py migrate && gunicorn --workers 2 wsgi
+python manage.py migrate && python manage.py runserver "0.0.0.0:8000"
