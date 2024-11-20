@@ -16,3 +16,26 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build . --file standalone_Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: 'Create image file'
+      run: docker save --output ${{ secrets.IMAGE_PATH }} my-image-name
+    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_RBAC_CREDENTIALS }}
+
+    - name: Upload to Azure Blob Storage
+      env:
+        AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+        AZURE_CONTAINER_NAME: ${{ secrets.AZURE_CONTAINER_NAME }}
+        IMAGE_PATH: ${{ secrets.IMAGE_PATH }}
+        
+      run: |
+        az storage blob upload \
+          --account-name $AZURE_STORAGE_ACCOUNT \
+          -f $IMAGE_PATH \
+          -c $AZURE_CONTAINER_NAME \
+          -n image.tar \
+          --auth-mode login \
+          --overwrite
