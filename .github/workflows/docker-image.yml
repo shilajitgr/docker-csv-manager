@@ -36,6 +36,6 @@ jobs:
           --account-name $AZURE_STORAGE_ACCOUNT \
           -f $IMAGE_PATH \
           -c $AZURE_CONTAINER_NAME \
-          -n image.tar \
+          -n images/image.tar \
           --auth-mode login \
           --overwrite
